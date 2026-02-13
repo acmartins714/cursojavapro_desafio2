@@ -2,6 +2,9 @@ package com.devsuperior.desafio2.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "tb_atividade")
 public class Atividade {
@@ -12,6 +15,9 @@ public class Atividade {
     private String nome;
     private String descricao;
     private Double preco;
+
+    @OneToMany(mappedBy = "ativ")
+    private List<Bloco> ativs = new ArrayList<>();
 
     public Atividade() {
     }
@@ -53,6 +59,10 @@ public class Atividade {
 
     public void setPreco(Double preco) {
         this.preco = preco;
+    }
+
+    public List<Bloco> getAtivs() {
+        return ativs;
     }
 
 }

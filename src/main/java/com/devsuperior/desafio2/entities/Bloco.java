@@ -11,16 +11,25 @@ public class Bloco {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant inicio;
+
+    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant fim;
+
+    @ManyToOne
+    @JoinColumn(name = "ativ_id")
+    private Atividade ativ;
 
     public Bloco() {
     }
 
-    public Bloco(Integer id, Instant inicio, Instant fim) {
+    public Bloco(Integer id, Instant inicio, Instant fim, Atividade atividade) {
         this.id = id;
         this.inicio = inicio;
         this.fim = fim;
+        this.ativ = ativ;
     }
 
     public Integer getId() {
@@ -47,4 +56,11 @@ public class Bloco {
         this.fim = fim;
     }
 
+    public Atividade getAtiv() {
+        return ativ;
+    }
+
+    public void setAtiv(Atividade ativ) {
+        this.ativ = ativ;
+    }
 }
