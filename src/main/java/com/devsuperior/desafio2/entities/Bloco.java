@@ -3,6 +3,7 @@ package com.devsuperior.desafio2.entities;
 import jakarta.persistence.*;
 
 import java.time.Instant;
+import java.util.Objects;
 
 @Entity
 @Table(name = "tb_bloco")
@@ -19,8 +20,8 @@ public class Bloco {
     private Instant fim;
 
     @ManyToOne
-    @JoinColumn(name = "ativ_id")
-    private Atividade ativ;
+    @JoinColumn(name = "atividade_id")
+    private Atividade atividade;
 
     public Bloco() {
     }
@@ -29,7 +30,7 @@ public class Bloco {
         this.id = id;
         this.inicio = inicio;
         this.fim = fim;
-        this.ativ = ativ;
+        this.atividade = atividade;
     }
 
     public Integer getId() {
@@ -57,10 +58,34 @@ public class Bloco {
     }
 
     public Atividade getAtiv() {
-        return ativ;
+        return atividade;
     }
 
     public void setAtiv(Atividade ativ) {
-        this.ativ = ativ;
+        this.atividade = atividade;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Bloco bloco = (Bloco) o;
+        return Objects.equals(id, bloco.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Bloco{" +
+                "id=" + id +
+                ", inicio=" + inicio +
+                ", fim=" + fim +
+                ", atividade=" + atividade +
+                '}';
+    }
+
 }
